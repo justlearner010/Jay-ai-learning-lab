@@ -7,3 +7,6 @@
 [submodule "projects/my_website"]
 	path = projects/my_website
 	url = https://github.com/justlearner010/my_website.git
+[submodule "notes/library"]
+	path = notes/library
+	url = https://github.com/justlearner010/jay-ai-engineering-notes.git

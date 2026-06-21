@@ -21,13 +21,17 @@
 | 路径 | 用途 |
 | --- | --- |
 | [`projects/`](./projects) | 以 Git submodule 关联的实践项目 |
-| `notes/` | 算法、Python、TypeScript 等主题笔记 |
+| [`notes/`](./notes/) | 独立笔记仓库的分类地图与子模块入口 |
 | [`logs/`](./logs/) | 可选的轻量学习日志 |
 | [`summary/`](./summary/) | 周、月度和阶段总结 |
 | [`templates/`](./templates/) | 轻量日志和总结模板 |
 | [`roadmap.md`](./roadmap.md) | 阶段性学习路线与优先级 |
-| [`archives`](./archives) |历史学习文件、计划归档｜
+| [`archives/`](./archives/) | 历史学习文件、计划归档 |
 | [`to do list.md`](./to%20do%20list.md) | 当前任务清单 |
+
+## 笔记导航
+
+Learning Lab 只作为笔记地图。实际内容位于独立的 [jay-ai-engineering-notes](https://github.com/justlearner010/jay-ai-engineering-notes) 仓库，可以从 [`notes/`](./notes/) 按主题访问。
 
 ## 关联项目
 
