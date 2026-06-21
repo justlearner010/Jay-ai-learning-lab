@@ -7,4 +7,4 @@
 - 只记录推进内容、证据和下一步。
 - 不统计学习时长，不需要补记。
 
-使用 [`templates/daily-log.md`](../templates/daily-log.md) 快速开始。
+使用 [`templates/daily-log.md`](daily-log%20<%%20tp.date.now("YYYY-MM-DD")%20%>.md) 快速开始。

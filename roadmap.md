@@ -47,6 +47,16 @@
 - [x] 创建`logs/`
 - [x] 创建 `templates/`
 - [x] 创建`to do list`
-- [ ] 把旧计划、旧作业、原始记录移动到 `archive/`
+- [x] 把旧计划、旧作业、原始记录移动到 `archive/`
 - [x] 写好仓库 `README.md`
 - [ ] 写第一篇 weekly review
+
+---
+## Phase 2: Python文本CLI工具迭代与算法模版和Linux- CSAPP学习的初步构建
+
+- [ ] 为CLI工具加入更多边界条件测试
+- [ ] 加入选定单词的词频统计功能，做成CLI的-- 格式的命令行工具调用
+- [ ] 研究CLI工具的CLI化，将它变得更加工程化，将这个项目看为未来RAG项目的一个文本处理部分
+- [ ] Linux - CSAPP仓库构建：初步定为：Linux学习 、CSAPP学习，具体结构待定
+- [ ] 算法练习以及模版构建 准备借鉴：[Algo-Atlas](https://github.com/lvy010/Algo-Atlas)
+

@@ -18,16 +18,17 @@
 
 ## 仓库结构
 
-| 路径 | 用途 |
-| --- | --- |
-| [`projects/`](./projects) | 以 Git submodule 关联的实践项目 |
-| [`notes/`](./notes/) | 独立笔记仓库的分类地图与子模块入口 |
-| [`logs/`](./logs/) | 可选的轻量学习日志 |
-| [`summary/`](./summary/) | 周、月度和阶段总结 |
-| [`templates/`](./templates/) | 轻量日志和总结模板 |
-| [`roadmap.md`](./roadmap.md) | 阶段性学习路线与优先级 |
-| [`archives/`](./archives/) | 历史学习文件、计划归档 |
-| [`to do list.md`](./to%20do%20list.md) | 当前任务清单 |
+| 路径                                     | 用途                      |
+| -------------------------------------- | ----------------------- |
+| [`projects/`](./projects)              | 以 Git submodule 关联的实践项目 |
+| [`notes/`](./notes/)                   | 独立笔记仓库的分类地图与子模块入口       |
+| [`logs/`](./logs/)                     | 可选的轻量学习日志               |
+| [`summary/`](./summary/)               | 周、月度和阶段总结               |
+| [`templates/`](./templates/)           | 轻量日志和总结模板               |
+| [`roadmap.md`](./roadmap.md)           | 阶段性学习路线与优先级             |
+| [`archives/`](./archives/)             | 历史学习文件、计划归档             |
+| [`to do list.md`](./to%20do%20list.md) | 当前任务清单                  |
+| [`incubator/`](./incubator)            | 项目孵化池，用于将脑中的想法孵化成实际项目   |
 
 ## 笔记导航
 
