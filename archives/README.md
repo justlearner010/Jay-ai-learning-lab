@@ -21,7 +21,7 @@
 这个仓库记录了我早期对 AI Agent 实习路线、学习任务、项目规划和每日作业的探索。
 它的颗粒度较大，内容较杂，因此现在将其作为历史归档保留。
 
-* Repository: https://github.com/justlearner010/ai-agent-intership-roadmap
+* Repository: [https://github.com/justlearner010/ai-agent-intership-roadmap](https://github.com/justlearner010/jay-ai-agent-roadmap-archive)
 * Status: archived / historical reference
 * Current replacement: `Jay-ai-learning-lab`
 
