@@ -25,6 +25,33 @@ Phase 2 只覆盖三个基础模式：
 
 不在本阶段处理动态规划、图论、高阶树结构、竞赛模板或题库自动化。
 
+### 2.1 题集来源与筛选
+
+仓库新增一份 `algorithms/problem-set.md`，记录从 Algo-Atlas 路线中筛选出的代表题、来源链接、所属模式、难度、计划周次和完成状态。
+
+采用 Algo-Atlas 的早期顺序：
+
+> Hash Map 基线复盘 → Two Pointers → Sliding Window
+
+现有 6 道 Hash Map 题作为基线，不重复计入 Phase 2 的 12 道新题。新题安排如下：
+
+| 顺序 | 模式 | LeetCode | 题目 |
+| --- | --- | --- | --- |
+| 1 | Two Pointers | 283 | Move Zeroes |
+| 2 | Two Pointers | 202 | Happy Number |
+| 3 | Two Pointers | 167 | Two Sum II - Input Array Is Sorted |
+| 4 | Two Pointers | 11 | Container With Most Water |
+| 5 | Two Pointers | 15 | 3Sum |
+| 6 | Two Pointers | 18 | 4Sum |
+| 7 | Sliding Window | 209 | Minimum Size Subarray Sum |
+| 8 | Sliding Window | 3 | Longest Substring Without Repeating Characters |
+| 9 | Sliding Window | 1004 | Max Consecutive Ones III |
+| 10 | Sliding Window | 904 | Fruit Into Baskets |
+| 11 | Sliding Window | 1658 | Minimum Operations to Reduce X to Zero |
+| 12 | Sliding Window | 438 | Find All Anagrams in a String |
+
+`Happy Number` 同时可以用 Hash Set 解循环，本阶段将其放在 Two Pointers 中训练快慢指针，并在题目笔记中链接相关模式。题集只定义学习顺序，不预先创建空白题解，也不将未完成题目标记为学习证据。
+
 ## 3. 目录设计
 
 ```text
