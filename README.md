@@ -1,25 +1,61 @@
-# CS AI Learning Lab
+# CS & AI Learning Lab
 
-A structured learning lab for turning my CS and AI Agent studies into projects, notes, tests, documentation, and weekly reviews.
+> 一个用于持续学习、项目实践和定期复盘的 CS / AI Agent 学习实验室。
 
-> 中文说明：这是我的 CS / AI Agent 学习系统仓库，用来记录项目、笔记、路线图、周复盘和旧材料归档。
+## 关于这个 Learning Lab
 
-## Current Focus
+这个仓库是我的 CS 与 AI Agent 学习系统总入口。它不只保存零散笔记，而是将学习过程组织为可追踪、可复盘、可展示的长期资产。
 
-- Python engineering
-- TypeScript fundamentals
-- Data structures
-- CSAPP and systems basics
-- AI Agent applications
+每个学习阶段尽量产出项目、笔记、测试、文档和复盘记录，而不只是完成一次性任务。
 
-## 中文说明
+## 当前学习方向
 
-这个仓库不是普通笔记堆，而是我的学习系统总入口。
+- Python 工程化
+- TypeScript 基础
+- 数据结构与算法
+- CSAPP 与计算机系统基础
+- AI Agent 应用与工程实践
 
-它包含：
+## 仓库结构
 
-- projects：项目进度与复盘
-- notes：概念笔记
-- logs：周复盘和月复盘
-- templates：复盘与笔记模板
-- archive：旧计划、旧作业和原始材料
+| 路径 | 用途 |
+| --- | --- |
+| `projects/` | 以 Git submodule 关联的实践项目 |
+| `notes/` | 算法、Python、TypeScript 等主题笔记 |
+| `logs/` | 周复盘、月复盘和学习记录 |
+| `templates/` | 学习、项目和复盘模板 |
+| [`roadmap.md`](./roadmap.md) | 阶段性学习路线与优先级 |
+| [`to do list.md`](./to%20do%20list.md) | 当前任务清单 |
+
+## 关联项目
+
+| 项目 | 定位 | 本地路径 |
+| --- | --- | --- |
+| [AI Reader](https://github.com/justlearner010/ai_reader) | 支持 AI 解释、翻译和笔记的阅读器 | [`projects/ai-reader`](./projects/ai-reader) |
+| [TextLab CLI](https://github.com/justlearner010/jay-first-cli-text-tool) | 用于文本统计、分块和测试练习的 Python CLI | [`projects/jay-first-cli-text-tool`](./projects/jay-first-cli-text-tool) |
+| [My Website](https://github.com/justlearner010/my_website) | 个人网站与项目展示入口 | [`projects/my_website`](./projects/my_website) |
+
+## 如何使用
+
+完整克隆仓库及其关联项目：
+
+```bash
+git clone --recurse-submodules https://github.com/justlearner010/Jay-ai-learning-lab.git
+```
+
+如果已经普通克隆了仓库，可以再初始化子模块：
+
+```bash
+git submodule update --init --recursive
+```
+
+## 学习循环
+
+1. 在 [`roadmap.md`](./roadmap.md) 中确定阶段目标。
+2. 在 [`to do list.md`](./to%20do%20list.md) 中拆分当前任务。
+3. 通过项目和笔记完成可见产出。
+4. 在 `logs/` 中记录周复盘和下一阶段改进。
+
+## English Summary
+
+This repository is my structured CS and AI Agent learning lab. It connects hands-on projects, technical notes, roadmaps, task tracking, and regular reviews so that each learning cycle produces visible and reusable outcomes.

@@ -1,0 +1,9 @@
+[submodule "projects/ai-reader"]
+	path = projects/ai-reader
+	url = https://github.com/justlearner010/ai_reader.git
+[submodule "projects/jay-first-cli-text-tool"]
+	path = projects/jay-first-cli-text-tool
+	url = https://github.com/justlearner010/jay-first-cli-text-tool.git
+[submodule "projects/my_website"]
+	path = projects/my_website
+	url = https://github.com/justlearner010/my_website.git

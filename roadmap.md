@@ -26,8 +26,8 @@
 当前最重要的三件事：
 
 1. 重构 GitHub 仓库结构
-2. 打磨 `ai_reader` 项目展示
-3. 构建 `textlab-cli` 作为 Python 工程化项目
+2. 打磨 [`ai_reader`](https://github.com/justlearner010/ai_reader) 项目展示
+3. 构建 [`textlab-cli`](https://github.com/justlearner010/jay-first-cli-text-tool) 作为 Python 工程化项目
 
 暂时不追求开很多新坑，优先把已有成果整理清楚。
 
