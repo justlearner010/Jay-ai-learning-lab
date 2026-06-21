@@ -1,30 +1,30 @@
-# Learning Lab README Design
+# Learning Lab README 设计说明
 
-## Goal
+## 目标
 
-Rewrite the repository README as the Chinese-first entry point for the CS and AI learning lab, with a short English summary for international readers.
+将仓库 README 改写为 CS 与 AI 学习实验室的中文主入口，并在末尾提供简短的英文摘要，方便英文读者了解仓库用途。
 
-## Structure
+## 内容结构
 
-The README will contain:
+README 将包含以下内容：
 
-1. A concise Chinese introduction explaining the purpose of the learning lab.
-2. Current learning directions and expected outputs.
-3. A directory map covering projects, notes, logs, templates, archive, roadmap, and task list.
-4. A related-project section linking the three Git submodules:
+1. 简洁的中文介绍，说明 Learning Lab 的定位和用途。
+2. 当前学习方向以及预期沉淀的成果。
+3. 仓库目录说明，覆盖项目、笔记、复盘、模板、归档、路线图和任务清单。
+4. 关联项目区域，链接三个 Git 子模块：
    - AI Reader
    - TextLab CLI
-   - Personal Website
-5. Basic repository usage, including cloning with `--recurse-submodules` and initializing submodules after a normal clone.
-6. Direct links to the roadmap and task list.
-7. A short English summary at the end.
+   - 个人网站
+5. 基本使用方式，包括通过 `--recurse-submodules` 完整克隆，以及普通克隆后初始化子模块。
+6. 路线图和任务清单的直接入口。
+7. README 末尾的简短英文摘要。
 
-## Scope
+## 修改范围
 
-This change only rewrites `README.md`. It does not restructure learning materials, modify child repositories, or change submodule revisions.
+本次只改写 `README.md`，不会重组学习资料、修改子仓库内容或改变子模块当前指向的版本。
 
-## Validation
+## 验证方式
 
-- Confirm all Markdown links target existing files or repositories.
-- Confirm `.gitmodules` matches the three projects described by the README.
-- Run `git diff --check` before committing.
+- 确认所有 Markdown 链接均指向存在的本地文件或 GitHub 仓库。
+- 确认 `.gitmodules` 与 README 中描述的三个关联项目一致。
+- 提交前运行 `git diff --check`，检查格式问题。
