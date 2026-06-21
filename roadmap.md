@@ -41,12 +41,12 @@
 
 ### 主要任务
 
-- [ ] 建立`cs-learning-lab`仓库结构
-- [ ] 创建`projects/`
-- [ ] 创建`notes/`
-- [ ] 创建`logs/`
-- [ ] 创建 `templates/`
-- [ ] 创建`to do list`
+- [x] 建立`cs-learning-lab`仓库结构
+- [x] 创建`projects/`
+- [x] 创建`notes/`
+- [x] 创建`logs/`
+- [x] 创建 `templates/`
+- [x] 创建`to do list`
 - [ ] 把旧计划、旧作业、原始记录移动到 `archive/`
-- [ ] 写好仓库 `README.md`
+- [x] 写好仓库 `README.md`
 - [ ] 写第一篇 weekly review
