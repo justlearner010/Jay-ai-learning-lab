@@ -5,7 +5,11 @@
 #### Phase2任务 2026 06.21 - 2026 07.21
 - [ ] 为cli-text-tool 添加版本更新信息，记录下每个版本新增的内容、功能、测试
 - [ ] 为 CSAPP-Linux学习建立一个`csapp-linux-lab`仓库，记录着我们Phase2的副线路对于CS底层学习的产出
-- [ ] 每日的算法练习 ，为算法模版库的建立打下基础，具体的安排写在phase2中
+- [ ] 算法 Week 1（06.22–06.28）：完成 Move Zeroes、Happy Number、Two Sum II，复刷 2 道 Hash Map 题
+- [ ] 算法 Week 2（06.29–07.05）：完成 Container With Most Water、3Sum、4Sum，复刷 2 道 Hash Map 题
+- [ ] 算法 Week 3（07.06–07.12）：完成 Minimum Size Subarray Sum、Longest Substring、Max Consecutive Ones III，复刷 2 道旧题
+- [ ] 算法 Week 4（07.13–07.19）：完成 Fruit Into Baskets、Minimum Operations to Reduce X to Zero、Find All Anagrams，复刷 2 道旧题
+- [ ] 07.20–07.21：更新[题集状态](./notes/library/algorithms/problem-set.md)，完成 Phase 2 算法复盘
 
 #### 未来会做的：探索与思考
 
