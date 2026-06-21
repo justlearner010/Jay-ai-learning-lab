@@ -22,8 +22,9 @@
 | --- | --- |
 | `projects/` | 以 Git submodule 关联的实践项目 |
 | `notes/` | 算法、Python、TypeScript 等主题笔记 |
-| `logs/` | 周复盘、月复盘和学习记录 |
-| `templates/` | 学习、项目和复盘模板 |
+| [`logs/`](./logs/) | 可选的轻量学习日志 |
+| [`summary/`](./summary/) | 周、月度和阶段总结 |
+| [`templates/`](./templates/) | 轻量日志和总结模板 |
 | [`roadmap.md`](./roadmap.md) | 阶段性学习路线与优先级 |
 | [`to do list.md`](./to%20do%20list.md) | 当前任务清单 |
 
@@ -51,10 +52,13 @@ git submodule update --init --recursive
 
 ## 学习循环
 
-1. 在 [`roadmap.md`](./roadmap.md) 中确定阶段目标。
-2. 在 [`to do list.md`](./to%20do%20list.md) 中拆分当前任务。
-3. 通过项目和笔记完成可见产出。
-4. 在 `logs/` 中记录周复盘和下一阶段改进。
+1. 在 [`roadmap.md`](./roadmap.md) 中确定阶段方向。
+2. 在 [`to do list.md`](./to%20do%20list.md) 中选择当前行动。
+3. 按需在 [`logs/`](./logs/) 中留下简单的进展和证据。
+4. 在 [`summary/`](./summary/) 中完成周总结或阶段总结。
+5. 只把经过复盘确认的方向变化更新回路线图。
+
+> 路线图 → 当前行动 → 可选日志 → 周/阶段总结 → 更新路线图
 
 ## English Summary
 
