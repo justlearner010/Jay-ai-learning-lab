@@ -24,7 +24,7 @@
 | [`notes/`](./notes/)                   | 独立笔记仓库的分类地图与子模块入口       |
 | [`logs/`](./logs/)                     | 可选的轻量学习日志               |
 | [`summary/`](./summary/)               | 周、月度和阶段总结               |
-| [`templates/`](./templates/)           | 轻量日志和总结模板               |
+| [`templates/`](./templates/)           | 轻量日志、总结和开发任务说明模板        |
 | [`roadmap.md`](./roadmap.md)           | 阶段性学习路线与优先级             |
 | [`archives/`](./archives/)             | 历史学习文件、计划归档             |
 | [`to do list.md`](./to%20do%20list.md) | 当前任务清单                  |
