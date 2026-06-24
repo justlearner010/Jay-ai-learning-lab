@@ -6,8 +6,8 @@ knowledge_point: Python 文件读取中的 with open 与常见文件打开模式
 new_or_old: new
 review_round: 0
 interval_days: 0
-next_review_date: 2026-06-23
-status: pending
+next_review_date: 2026-06-25
+status: fuzzy
 ---
 
 ## 1. 知识点与来源
@@ -73,7 +73,7 @@ status: pending
 - 自评：`[ ] 掌握` `[x] 模糊` `[ ] 答错`
 - 实际易错点：对于 -x 这个模式遗忘了
 - 完成时间：6.23
-- 下次复习日期：
+- 下次复习日期：2026-06-25
 
 ## 6. 下次复习建议
 

@@ -5,7 +5,7 @@
 #### Phase2任务 2026 06.21 - 2026 07.21
 - [ ] 为cli-text-tool 添加版本更新信息，记录下每个版本新增的内容、功能、测试
 - [x] 增加 `--word`、`--top`
-- [ ] 补充错误处理和端到端测试
+- [x] 补充错误处理和端到端测试
 - [ ] 拆分文件读取与纯文本处理
 - [ ] 明确 JSON/chunk 输出
 - [ ] 更新 README 和版本号
@@ -21,3 +21,5 @@
 - [ ] 沉淀自己的学习系统，把每个新主题的学习沉淀成一个迅速搭建的**模版系统**，不需要自己一点一点搭建项目结构
 - [x] 使用codex 进行每日学习的艾宾浩斯遗忘曲线的自动化，自动读取新增在GitHub上的新的笔记和内容，做好知识的retrieve、recall
 - [ ] Phase3任务设计和构想，结合AI Agent学习路线以及自己感兴趣的进行任务方向确认
+- [ ] 根据[立党AI学习研究完整教程第一期](https://www.youtube.com/watch?v=BqF6PUAXY1M)设计自己的minimal SW agent（可作为实际项目考虑）[视频总结](obsidian://open?vault=cs-ai-learning&file=incubator%2FMinimal%20SW%20Agent)
+- [ ]
