@@ -6,8 +6,8 @@ knowledge_point: JSON 的对象/数组结构与 Python 中 dumps/loads 的作用
 new_or_old: new
 review_round: 0
 interval_days: 0
-next_review_date: 2026-06-24
-status: pending
+next_review_date: 2026-06-26
+status: fuzzy
 ---
 
 ## 1. 知识点与来源
@@ -76,7 +76,7 @@ status: pending
 - 自评：`[ ] 掌握` `[x] 模糊` `[ ] 答错`
 - 实际易错点：json定义遗忘、json实际用法模糊
 - 完成时间：6.24
-- 下次复习日期：
+- 下次复习日期：2026-06-26
 
 ## 6. 下次复习建议
 
