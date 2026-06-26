@@ -6,8 +6,8 @@ knowledge_point: Python 字符串处理中 strip、split、join、replace 的职
 new_or_old: new
 review_round: 0
 interval_days: 0
-next_review_date: 2026-06-25
-status: pending
+next_review_date: 2026-06-27
+status: fuzzy
 ---
 
 ## 1. 知识点与来源
@@ -25,13 +25,13 @@ status: pending
 ## 3. 我的作答区
 
 1.
->
+>去掉空白、按照分割规则切开，多个字符串、把多个字符串合并成一个
 
 2.
->
+>不知道
 
 3.
->
+>strip-split-replace
 
 ## 4. 参考答案与易错点解析
 
@@ -63,10 +63,10 @@ status: pending
 
 ## 5. 复习结果
 
-- 自评：`[ ] 掌握` `[ ] 模糊` `[ ] 答错`
+- 自评：`[ ] 掌握` `[x] 模糊` `[ ] 答错`
 - 实际易错点：
 - 完成时间：
-- 下次复习日期：
+- 下次复习日期：2026-06-27
 
 ## 6. 下次复习建议
 

@@ -6,8 +6,8 @@ knowledge_point: Python 文件读取中的 with open 与常见文件打开模式
 new_or_old: old
 review_round: 1
 interval_days: 2
-next_review_date: 2026-06-25
-status: pending
+next_review_date: 2026-06-29
+status: mastered
 ---
 
 ## 1. 知识点与来源
@@ -25,11 +25,11 @@ status: pending
 ## 3. 我的作答区
 
 1.
->
+>with open()自动关闭
 2.
->
+>r：read w：write  x：新增 a：add添加
 3.
->
+>rb，和ra，一个读取二进制，一个新增
 
 ## 4. 参考答案与易错点解析
 
@@ -67,10 +67,10 @@ status: pending
 
 ## 5. 复习结果
 
-- 自评：`[ ] 掌握` `[ ] 模糊` `[ ] 答错`
+- 自评：`[x] 掌握` `[ ] 模糊` `[ ] 答错`
 - 实际易错点：
 - 完成时间：
-- 下次复习日期：
+- 下次复习日期：2026-06-29
 
 ## 6. 下次复习建议
 

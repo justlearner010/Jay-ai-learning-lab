@@ -12,7 +12,7 @@ from typing import Iterable
 ROOT = Path(__file__).resolve().parents[1]
 NOTES_ROOT = ROOT / "notes" / "library"
 OUTPUT_ROOT = ROOT / "knowledge-review" / "content"
-TODAY = date(2026, 6, 25)
+TODAY = date.fromisoformat(os.environ.get("REVIEW_TODAY", date.today().isoformat()))
 INTERVALS = [0, 1, 2, 4, 7, 15, 30, 60]
 STATUS_TO_DAYS = {"wrong": 1, "fuzzy": 2}
 
@@ -469,6 +469,7 @@ def extract_actual_error(body: str) -> str:
 
 
 def schedule_old_candidates(records: list[ReviewRecord]) -> list[ReviewRecord]:
+    status_rank = {"wrong": 0, "fuzzy": 1, "mastered": 2}
     latest = latest_records(records)
     candidates: list[ReviewRecord] = []
     for record in latest.values():
@@ -479,8 +480,8 @@ def schedule_old_candidates(records: list[ReviewRecord]) -> list[ReviewRecord]:
         candidates.append(record)
     candidates.sort(
         key=lambda item: (
-            0 if item.next_review_date <= TODAY else 1,
-            0 if item.meta.get("status") in {"wrong", "fuzzy"} else 1,
+            item.next_review_date,
+            status_rank.get(item.meta.get("status", ""), 9),
             item.review_date,
             item.source_note,
             item.knowledge_point,

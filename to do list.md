@@ -3,6 +3,9 @@
 ### 近期要做的
 ---
 #### Phase2任务 2026 06.21 - 2026 07.21
+- [ ] 2026-06-27：重构 `jay-first-cli-text-tool` 的 core layer，把纯文本处理逻辑和文件读取/Console 输出解耦
+- [ ] 2026-06-27：完善 Issue #7，重构 `build_parser()` / `parse_args(argv=None)`，让 pytest 可以传假参数测试 CLI parser
+- [ ] 2026-06-27：完善 Issue #2，补齐文件权限、解码失败、非法参数、无输出操作等错误处理与测试
 - [ ] 为cli-text-tool 添加版本更新信息，记录下每个版本新增的内容、功能、测试
 - [x] 增加 `--word`、`--top`
 - [x] 补充错误处理和端到端测试
