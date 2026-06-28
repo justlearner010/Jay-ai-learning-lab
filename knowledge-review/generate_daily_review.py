@@ -517,9 +517,14 @@ def main() -> None:
     records = load_review_records()
     updated_records = update_pending_records(records)
     records = load_review_records()
-    latest = latest_records(records)
+    planning_records = [record for record in records if record.review_date < TODAY]
+    prior_latest = latest_records(planning_records)
+    today_records = sorted(
+        [record for record in records if record.review_date == TODAY],
+        key=lambda item: (item.meta.get("new_or_old", ""), item.path.name),
+    )
 
-    reviewed_notes = {record.source_note for record in records}
+    reviewed_notes = {record.source_note for record in planning_records}
     new_candidates = [
         note
         for note in source_notes
@@ -527,7 +532,7 @@ def main() -> None:
     ]
     new_candidates.sort(key=lambda note: (note["added_at"], note["path"]))
 
-    old_candidates = schedule_old_candidates(records)
+    old_candidates = schedule_old_candidates(planning_records)
 
     target_new = 2
     target_old = 1
@@ -549,61 +554,87 @@ def main() -> None:
     out_dir = OUTPUT_ROOT / TODAY.isoformat()
     created_files = 0
     list_rows: list[tuple[str, str, str, str, str, str]] = []
+    out_dir.mkdir(parents=True, exist_ok=True)
 
-    for note in selected_new:
-        template = NOTE_TEMPLATES[note["path"]]
-        knowledge_point, body = build_new_card(note)
-        filename = f"{TODAY.isoformat()}-{safe_slug(template['slug'])}.md"
-        meta = {
-            "source_note": note["path"],
-            "source_added_at": note["added_at"],
-            "review_date": TODAY.isoformat(),
-            "knowledge_point": knowledge_point,
-            "new_or_old": "new",
-            "review_round": "0",
-            "interval_days": "0",
-            "next_review_date": TODAY.isoformat(),
-            "status": "pending",
-        }
-        created = write_card(out_dir / filename, meta, body)
-        created_files += int(created)
-        list_rows.append(
-            (
-                "new",
-                knowledge_point,
-                filename,
-                note["added_at"],
-                f"首轮建档；按添加时间排序后进入队列，且该笔记尚未进入复习记录。",
-                "pending",
+    if today_records:
+        for record in today_records:
+            row_type = record.meta.get("new_or_old", "old")
+            if row_type == "new":
+                reason = "同日重跑；沿用今天已创建的新知识点复习文件，避免重复建档。"
+            else:
+                previous = prior_latest.get((record.source_note, record.knowledge_point))
+                if previous is not None:
+                    reason = (
+                        "同日重跑；沿用今天已创建的旧知识点复习文件。"
+                        f" 上一轮状态为 `{previous.meta.get('status')}`，最近复习日为 {previous.meta['review_date']}。"
+                    )
+                else:
+                    reason = "同日重跑；沿用今天已创建的旧知识点复习文件，避免重复生成。"
+            list_rows.append(
+                (
+                    row_type,
+                    record.knowledge_point,
+                    record.path.name,
+                    record.meta["source_added_at"],
+                    reason,
+                    record.meta.get("status", "pending"),
+                )
             )
-        )
+    else:
+        for note in selected_new:
+            template = NOTE_TEMPLATES[note["path"]]
+            knowledge_point, body = build_new_card(note)
+            filename = f"{TODAY.isoformat()}-{safe_slug(template['slug'])}.md"
+            meta = {
+                "source_note": note["path"],
+                "source_added_at": note["added_at"],
+                "review_date": TODAY.isoformat(),
+                "knowledge_point": knowledge_point,
+                "new_or_old": "new",
+                "review_round": "0",
+                "interval_days": "0",
+                "next_review_date": TODAY.isoformat(),
+                "status": "pending",
+            }
+            created = write_card(out_dir / filename, meta, body)
+            created_files += int(created)
+            list_rows.append(
+                (
+                    "new",
+                    knowledge_point,
+                    filename,
+                    note["added_at"],
+                    "首轮建档；按添加时间排序后进入队列，且该笔记尚未进入复习记录。",
+                    "pending",
+                )
+            )
 
-    for record in selected_old:
-        filename = f"{TODAY.isoformat()}-{safe_slug(record.path.stem.split('-', 3)[-1])}.md"
-        body = build_old_card(record)
-        meta = {
-            "source_note": record.source_note,
-            "source_added_at": record.meta["source_added_at"],
-            "review_date": TODAY.isoformat(),
-            "knowledge_point": record.knowledge_point,
-            "new_or_old": "old",
-            "review_round": str(int(record.meta.get("review_round", "0")) + 1),
-            "interval_days": str(due_interval_for_old(record)),
-            "next_review_date": TODAY.isoformat(),
-            "status": "pending",
-        }
-        created = write_card(out_dir / filename, meta, body)
-        created_files += int(created)
-        list_rows.append(
-            (
-                "old",
-                record.knowledge_point,
-                filename,
-                record.meta["source_added_at"],
-                f"已到期旧知识点；上一轮状态为 `{record.meta.get('status')}`，最近复习日为 {record.meta['review_date']}。",
-                "pending",
+        for record in selected_old:
+            filename = f"{TODAY.isoformat()}-{safe_slug(record.path.stem.split('-', 3)[-1])}.md"
+            body = build_old_card(record)
+            meta = {
+                "source_note": record.source_note,
+                "source_added_at": record.meta["source_added_at"],
+                "review_date": TODAY.isoformat(),
+                "knowledge_point": record.knowledge_point,
+                "new_or_old": "old",
+                "review_round": str(int(record.meta.get("review_round", "0")) + 1),
+                "interval_days": str(due_interval_for_old(record)),
+                "next_review_date": TODAY.isoformat(),
+                "status": "pending",
+            }
+            created = write_card(out_dir / filename, meta, body)
+            created_files += int(created)
+            list_rows.append(
+                (
+                    "old",
+                    record.knowledge_point,
+                    filename,
+                    record.meta["source_added_at"],
+                    f"已到期旧知识点；上一轮状态为 `{record.meta.get('status')}`，最近复习日为 {record.meta['review_date']}。",
+                    "pending",
+                )
             )
-        )
 
     unresolved_pending = pending_summary(records)
     actual_new = sum(1 for row in list_rows if row[0] == "new")
@@ -613,6 +644,16 @@ def main() -> None:
         ratio_reason_parts.append("今天按默认 3 个知识点执行，实际比例满足 2 : 1。")
     else:
         ratio_reason_parts.append(f"今天实际安排为 {actual_new} : {actual_old}。")
+    if today_records:
+        ratio_reason_parts.append("检测到今天已生成的复习文件，本次重跑沿用既有安排并只重建清单，未重复创建同一知识点。")
+    if len(new_candidates) < target_new:
+        ratio_reason_parts.append(
+            f"可建档的新知识点不足：当前仅有 {len(new_candidates)} 个符合模板且尚未进入复习记录的新知识点。"
+        )
+    if len(old_candidates) < target_old:
+        ratio_reason_parts.append(
+            f"已到期旧知识点不足：当前仅有 {len(old_candidates)} 个已完成且到期的旧知识点可重排。"
+        )
     if not old_candidates:
         ratio_reason_parts.append("没有可重排的已完成旧知识点；仅保留历史 pending，避免重复生成同一知识点。")
     if unresolved_pending:

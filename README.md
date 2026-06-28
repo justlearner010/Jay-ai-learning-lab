@@ -25,6 +25,8 @@
 | [`logs/`](./logs/)                     | 可选的轻量学习日志               |
 | [`summary/`](./summary/)               | 周、月度和阶段总结               |
 | [`templates/`](./templates/)           | 轻量日志、总结和开发任务说明模板        |
+| [`AGENTS.md`](./AGENTS.md)             | AI / 自动化协作时的仓库操作协议       |
+| [`docs/`](./docs/)                     | 工作流说明、设计记录和 AI 操作上下文     |
 | [`roadmap.md`](./roadmap.md)           | 阶段性学习路线与优先级             |
 | [`archives/`](./archives/)             | 历史学习文件、计划归档             |
 | [`to do list.md`](./to%20do%20list.md) | 当前任务清单                  |
@@ -65,6 +67,10 @@ git submodule update --init --recursive
 5. 只把经过复盘确认的方向变化更新回路线图。
 
 > 路线图 → 当前行动 → 可选日志 → 周/阶段总结 → 更新路线图
+
+## AI / Obsidian 协作入口
+
+AI 会话先读取 [`AGENTS.md`](./AGENTS.md) 和 [`docs/ai-operating-manual.md`](./docs/ai-operating-manual.md)。这两份文件定义了目录边界、复习卡规则、任务分流方式，以及哪些内容不能由 AI 擅自推断。
 
 ## English Summary
 
