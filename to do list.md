@@ -10,7 +10,7 @@
 - [x] 增加 `--word`、`--top`
 - [x] 补充错误处理和端到端测试
 - [x] 拆分文件读取与纯文本处理
-- [ ] 明确 JSON/chunk 输出
+- [x] 明确 JSON/chunk 输出
 - [ ] 更新 README 和版本号
 - [ ] 为 CSAPP-Linux学习建立一个`csapp-linux-lab`仓库，记录着我们Phase2的副线路对于CS底层学习的产出
 - [x] 算法 Week 1（06.22–06.28）：完成 Move Zeroes、Happy Number、Two Sum II，复刷 2 道 Hash Map 题
