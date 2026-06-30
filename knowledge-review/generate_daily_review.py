@@ -409,17 +409,36 @@ def strip_code_blocks(text: str) -> str:
     return re.sub(r"```.*?```", "", text, flags=re.S)
 
 
+def is_placeholder_line(line: str) -> bool:
+    return any(snippet in line for snippet in PLACEHOLDER_SNIPPETS)
+
+
+def is_navigation_line(line: str) -> bool:
+    return bool(re.fullmatch(r"\[[^\]]+\]\([^)]+\)", line.strip()))
+
+
+def clean_summary_line(raw: str) -> str:
+    line = raw.strip()
+    if not line:
+        return ""
+    if line.startswith("![["):
+        return ""
+    line = re.sub(r"^\-+\s*", "", line)
+    line = re.sub(r"^\*+\s*", "", line)
+    line = re.sub(r"^\d+[.)]\s*", "", line)
+    line = line.replace("`", "").strip()
+    if not line or is_placeholder_line(line) or is_navigation_line(line):
+        return ""
+    return line
+
+
 def collapse_text(text: str) -> str:
     text = strip_code_blocks(text)
     lines = []
     for raw in text.splitlines():
-        line = raw.strip()
+        line = clean_summary_line(raw)
         if not line:
             continue
-        if line.startswith("![["):
-            continue
-        line = re.sub(r"^\-+\s*", "", line)
-        line = line.replace("`", "")
         lines.append(line)
     return " ".join(lines)
 
@@ -427,13 +446,11 @@ def collapse_text(text: str) -> str:
 def bullet_summary(text: str, limit: int = 3) -> str:
     bullets: list[str] = []
     for raw in strip_code_blocks(text).splitlines():
-        line = raw.strip()
-        if not line or line.startswith("![["):
+        line = clean_summary_line(raw)
+        if not line:
             continue
-        if line.startswith(("- ", "* ")):
-            bullets.append(line[2:].strip())
-        elif re.match(r"^\d+[.)]\s*", line):
-            bullets.append(re.sub(r"^\d+[.)]\s*", "", line))
+        if raw.strip().startswith(("- ", "* ")) or re.match(r"^\d+[.)]\s*", raw.strip()):
+            bullets.append(line)
         if len(bullets) >= limit:
             break
     if bullets:
@@ -462,6 +479,33 @@ def first_section(sections: list[tuple[str, str]], keywords: list[str]) -> tuple
             if keyword.lower() in lower_heading:
                 return heading, body
     return None
+
+
+def is_metadata_section(heading: str, body: str) -> bool:
+    collapsed = collapse_text(body)
+    if heading.startswith("主题：") or heading.startswith("主题:"):
+        return True
+    return bool(re.fullmatch(r"日期[:：]?\s*\d{4}-\d{2}-\d{2}", collapsed))
+
+
+def fallback_section(
+    sections: list[tuple[str, str]],
+    exclude_headings: set[str] | None = None,
+) -> tuple[str, str]:
+    excluded = exclude_headings or set()
+    for heading, body in sections:
+        if heading in excluded:
+            continue
+        if is_metadata_section(heading, body):
+            continue
+        if collapse_text(body):
+            return heading, body
+    for heading, body in sections:
+        if heading not in excluded:
+            if is_metadata_section(heading, body):
+                continue
+            return heading, body
+    return sections[0]
 
 
 def status_text(status: str) -> str:
@@ -550,6 +594,55 @@ def build_algorithm_card(source_note: str, title: str, sections: list[tuple[str,
     )
 
 
+def build_algorithm_learning_card(title: str, sections: list[tuple[str, str]], preferred_label: str | None) -> CardDraft:
+    problem_name = re.sub(r"^\d+[. ]*", "", title).strip()
+    info = first_section(sections, ["题目信息"])
+    current = first_section(sections, ["当前理解"])
+    next_practice = first_section(sections, ["下次练习重点"])
+    pattern_match = re.search(r"模式：([^\n]+)", info[1]) if info else None
+    pattern = pattern_match.group(1).strip() if pattern_match else "Hash Map / Counter"
+    interview_match = re.search(r"面试验收：([^\n]+)", info[1]) if info else None
+    interview_goal = interview_match.group(1).strip() if interview_match else "能口述核心判断思路"
+
+    knowledge_point = preferred_label or f"{problem_name} 的 {pattern} 判定思路"
+    short_name = sanitize_filename_component(problem_name.lower().replace(" ", "-"))
+    scope = "题目信息、当前理解、下次练习重点"
+    questions = [
+        f"概念复述：`{problem_name}` 这道题要你判断什么，最终要返回什么结果？",
+        f"辨析/边界：为什么这道题更接近 `{pattern}`，而不是只判断字符是否出现过？",
+        "实际应用：根据当前理解，真正需要比较或维护的关键信息是什么？",
+        "下次练习：如果现在让你独立补全这题，你最该优先补哪一步证据或能力？",
+    ]
+    answers = [
+        make_answer(
+            bullet_summary(current[1] if current else problem_name),
+            "concept",
+        ),
+        make_answer(
+            f"题目信息给出的模式是 `{pattern}`。关键不在“字符/元素出现过没有”，而在于要比较需要的频率、剩余次数或对应关系是否满足题意。",
+            "boundary",
+        ),
+        make_answer(
+            bullet_summary(current[1] if current else "") or f"先抓住 `{problem_name}` 需要维护的匹配关系，再决定是否用 Counter 或字典保存频率。",
+            "application",
+        ),
+        make_answer(
+            (bullet_summary(next_practice[1]) if next_practice else interview_goal) or interview_goal,
+            "application",
+            hint="把下一次要独立完成的步骤说成可执行动作，而不是笼统地“再看看题解”。",
+        ),
+    ]
+    suggestion = f"下次先脱稿说清 `{problem_name}` 要比较的对象和 `{pattern}` 的理由，再补一版可独立复现的解法步骤。"
+    return CardDraft(
+        knowledge_point=knowledge_point,
+        short_name=short_name,
+        scope=scope,
+        questions=questions,
+        answers=answers,
+        suggestion=suggestion,
+    )
+
+
 def build_library_module_card(preferred_label: str | None) -> CardDraft:
     knowledge_point = preferred_label or "Python 中 import、模块与“不重复造轮子”的模块化思维"
     return CardDraft(
@@ -591,9 +684,12 @@ def build_structured_card(source_note: str, title: str, sections: list[tuple[str
     application = first_section(sections, ["为什么重要", "实际应用", "__name__", "模块搜索路径", "概念及代码", "最终解法"])
     warning = first_section(sections, ["常见错误", "不要", "错误记录"])
 
-    concept_heading, concept_body = concept if concept else sections[0]
-    boundary_heading, boundary_body = boundary if boundary else sections[min(1, len(sections) - 1)]
-    application_heading, application_body = application if application else sections[min(2, len(sections) - 1)]
+    concept_heading, concept_body = concept if concept else fallback_section(sections)
+    application_heading, application_body = application if application else fallback_section(sections, {concept_heading})
+    boundary_heading, boundary_body = boundary if boundary else fallback_section(
+        sections,
+        {concept_heading, application_heading},
+    )
 
     knowledge_point = preferred_label or f"{title} 的核心作用、边界与使用场景"
     short_name = sanitize_filename_component(preferred_label or default_label(source_note))
@@ -661,6 +757,10 @@ def build_card_draft(source_note: str, preferred_label: str | None = None) -> Ca
     title = note_title(source_note, text)
     sections = parse_sections(text)
     headings = [heading for heading, _ in sections]
+    if re.match(r"^\d+[. ]", title) and first_section(sections, ["题目信息"]):
+        if "题意复述" in headings and "最终解法" in headings:
+            return build_algorithm_card(source_note, title, sections, preferred_label)
+        return build_algorithm_learning_card(title, sections, preferred_label)
     if "题意复述" in headings and "最终解法" in headings:
         return build_algorithm_card(source_note, title, sections, preferred_label)
     if any(keyword in " ".join(headings) for keyword in ["一句话解释", "为什么重要", "区别", "关系", "__name__", "常见错误"]):
