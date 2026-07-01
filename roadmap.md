@@ -49,7 +49,7 @@
 - [x] 创建`to do list`
 - [x] 把旧计划、旧作业、原始记录移动到 `archive/`
 - [x] 写好仓库 `README.md`
-- [ ] 写第一篇 weekly review
+- [x] 写第一篇 weekly review
 
 ---
 ## Phase 2: Python文本CLI工具迭代与算法模版和Linux- CSAPP学习的初步构建
