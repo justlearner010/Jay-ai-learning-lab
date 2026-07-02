@@ -97,10 +97,5 @@ User query -> Generative LLM -> Output
 
 
 
-### Some questions may in Chapter 2
 
-- What is token
-- What is embedding
-- How can a word be a vector
-- the n-dimensions, what is the definition of dimensions?
--
+
