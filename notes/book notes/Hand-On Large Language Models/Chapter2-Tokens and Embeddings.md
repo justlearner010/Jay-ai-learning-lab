@@ -80,7 +80,7 @@ It is a many-to-one mapping, which reduces orthographic information and surface 
 
 Tokenization method: Byte pair encoding (BPE), 
 
-BPE: Use a single byte based on frequency to composed of a pair
+BPE: Use a single character based on frequency to composed of a pair
 
 ```
 START: character level

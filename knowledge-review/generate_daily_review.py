@@ -21,6 +21,15 @@ PLACEHOLDER_SNIPPETS = (
     "写 3-5 句话",
     "说明它和当前项目、AI Agent、RAG、后端工程或科班基础有什么关系",
 )
+GENERIC_SECTION_HEADINGS = {
+    "一句话解释",
+    "为什么重要",
+    "概念及代码",
+    "常见错误",
+    "我今天的理解",
+    "后续问题",
+    "总结表",
+}
 
 
 @dataclass
@@ -376,9 +385,11 @@ def sanitize_filename_component(value: str) -> str:
 
 
 def note_title(source_note: str, text: str) -> str:
-    for line in text.splitlines():
+    for line in strip_code_blocks(text).splitlines():
         stripped = line.strip()
-        if stripped.startswith("#"):
+        if re.match(r"^#{2,6}\s+", stripped):
+            break
+        if re.match(r"^#\s+", stripped):
             return re.sub(r"^\#+\s*", "", stripped)
     stem = Path(source_note).stem
     stem = re.sub(r"^\d{4}-\d{2}-\d{2}", "", stem)
@@ -390,7 +401,15 @@ def parse_sections(text: str) -> list[tuple[str, str]]:
     sections: list[tuple[str, str]] = []
     current_heading: str | None = None
     buffer: list[str] = []
+    in_code_block = False
     for line in text.splitlines():
+        if line.strip().startswith("```"):
+            in_code_block = not in_code_block
+            buffer.append(line)
+            continue
+        if in_code_block:
+            buffer.append(line)
+            continue
         if re.match(r"^\#{1,6}\s+", line.strip()):
             if current_heading is not None:
                 sections.append((current_heading, "\n".join(buffer).strip()))
@@ -422,6 +441,10 @@ def clean_summary_line(raw: str) -> str:
     if not line:
         return ""
     if line.startswith("![["):
+        return ""
+    if line.startswith("!["):
+        return ""
+    if re.fullmatch(r"https?://\S+", line):
         return ""
     line = re.sub(r"^\-+\s*", "", line)
     line = re.sub(r"^\*+\s*", "", line)
@@ -506,6 +529,18 @@ def fallback_section(
                 continue
             return heading, body
     return sections[0]
+
+
+def choose_section(
+    primary: tuple[str, str] | None,
+    sections: list[tuple[str, str]],
+    exclude_headings: set[str] | None = None,
+) -> tuple[str, str]:
+    if primary is not None:
+        heading, body = primary
+        if heading not in GENERIC_SECTION_HEADINGS and not is_placeholder_body(body):
+            return primary
+    return fallback_section(sections, exclude_headings)
 
 
 def status_text(status: str) -> str:
@@ -684,9 +719,10 @@ def build_structured_card(source_note: str, title: str, sections: list[tuple[str
     application = first_section(sections, ["为什么重要", "实际应用", "__name__", "模块搜索路径", "概念及代码", "最终解法"])
     warning = first_section(sections, ["常见错误", "不要", "错误记录"])
 
-    concept_heading, concept_body = concept if concept else fallback_section(sections)
-    application_heading, application_body = application if application else fallback_section(sections, {concept_heading})
-    boundary_heading, boundary_body = boundary if boundary else fallback_section(
+    concept_heading, concept_body = choose_section(concept, sections)
+    application_heading, application_body = choose_section(application, sections, {concept_heading})
+    boundary_heading, boundary_body = choose_section(
+        boundary,
         sections,
         {concept_heading, application_heading},
     )
