@@ -221,7 +221,7 @@ task → model → action → execution → observation → next loop
 
 ## 7.1 Agent不是“智能体”，是执行器
 
-> Agent ≠ 思考系统  
+> Agent ≠ 思考系统
 > Agent = 可控执行机器
 
 ---
@@ -332,4 +332,3 @@ Agent无法：
 > SW Agent的本质不是“更聪明的模型”，而是“在可验证环境中持续执行、反馈与修正的工程闭环系统”。
 
 ---
-

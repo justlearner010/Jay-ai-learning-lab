@@ -74,3 +74,9 @@ Use this routing table when new information appears:
 - Add a template for new learning topics that includes goals, source material, output, review prompts, and evidence.
 - Add a small checklist for converting an incubator idea into a project.
 - Keep `knowledge-review/generate_daily_review.py` aligned with the rules in `AGENTS.md`.
+
+## Git Rhythm
+
+- Daily repository sync is for uploading Markdown notes, logs, and review cards safely to the remote branch.
+- Weekly merge is the default cadence for bringing Markdown-only updates from the working branch back into `main`.
+- If a candidate weekly batch includes scripts, config changes, or submodule diffs, do not treat it as a routine notes merge.

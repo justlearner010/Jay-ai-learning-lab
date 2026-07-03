@@ -50,6 +50,14 @@ When starting work in this repository, read these files before making changes:
 - Update `summary/` after a real weekly or phase review, not after every task.
 - Do not commit, push, archive, or rewrite history unless the user explicitly asks.
 
+## Git Sync And Merge Rules
+
+- Daily sync automation should only stage and upload main-repo `*.md` files.
+- Do not auto-stage scripts, config files, submodule changes, caches, build artifacts, or machine-local state during daily sync.
+- Treat daily sync as backup and remote visibility, not as implicit merge to `main`.
+- Batch-merge Markdown-only changes from the working branch into `main` on a weekly cadence by default.
+- If the weekly batch contains non-Markdown files or submodule changes, stop the merge and leave that branch for manual review instead of partially guessing intent.
+
 ## AI Workflow Preference
 
 The useful pattern for this vault is:

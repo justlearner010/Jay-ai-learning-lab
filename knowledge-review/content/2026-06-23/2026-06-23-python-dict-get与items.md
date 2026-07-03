@@ -29,7 +29,7 @@ status: pending
 
 2. 我忘记了get()方法，但是dic['Germany']key是不存在的，所以会在list报错
 
-3. 
+3.
 > for k v in dic.items(),items()把键值对分开，这样你确定自己拿到了键和值
 
 ## 4. 参考答案与易错点解析

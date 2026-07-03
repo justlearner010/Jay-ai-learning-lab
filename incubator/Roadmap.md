@@ -1,5 +1,5 @@
 
-``` 
+```
 Stage 1: CLI System
   → text pipeline + modular design
 
