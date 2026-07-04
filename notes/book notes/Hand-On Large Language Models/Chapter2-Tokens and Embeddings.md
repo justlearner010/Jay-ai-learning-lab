@@ -108,3 +108,13 @@ low + er
 low + est
 ```
 
+
+**Flan-T5(2022)**
+
+Core problem :
+Traditional subword tokenization is **deterministic**
+
+Instead of using one fixed tokenization:
+
+**randomly sample multiple valid subword segmentations during training**
+
