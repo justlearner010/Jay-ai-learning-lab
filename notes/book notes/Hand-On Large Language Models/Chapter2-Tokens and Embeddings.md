@@ -118,3 +118,15 @@ Instead of using one fixed tokenization:
 
 **randomly sample multiple valid subword segmentations during training**
 
+
+---
+**Tokenizer parameters**
+
+- Vocabulary size
+- Special tokens
+- Capitalization
+
+
+---
+**Token Embedding**
+
