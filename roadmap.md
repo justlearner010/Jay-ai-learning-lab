@@ -61,7 +61,7 @@
 - [x] 建设[面试算法模式库](./notes/library/algorithms/README.md)：复刷 6 道 Hash Map 基线题，新增 6 道 Two Pointers 和 6 道 Sliding Window；每周完成 3 道新题和 2 道无提示复刷
 
 ---
-## Phase3:补足RAG所需的前置基础知识
+## Phase3:补足RAG所需的前置基础知识 & CSAPP学习 & CS70离散数学学习
 ### 目标
 
 不是泛泛补完数学、PyTorch 或 Transformer，而是补足能理解和实现最小 RAG demo 的前置能力。
@@ -110,3 +110,19 @@
 - [ ] 增加最小测试：至少覆盖分块、检索和空结果处理
 - [ ] 写 README：说明项目目标、运行方式、架构流程、已知局限和下一步
 - [ ] 写一次复盘：记录哪些基础知识真正用上了，哪些只是暂时不需要
+
+
+### CS70:  Discrete Mathematics and Probability Theory
+
+[官方网址](https://www.eecs70.org)
+
+每日学习流程：
+
+- full-slides
+- mini-vitamin
+- Note
+- Discussion
+形成自己的笔记
+
+### CSAPP学习：
+
