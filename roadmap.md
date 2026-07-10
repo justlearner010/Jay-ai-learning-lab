@@ -61,68 +61,96 @@
 - [x] 建设[面试算法模式库](./notes/library/algorithms/README.md)：复刷 6 道 Hash Map 基线题，新增 6 道 Two Pointers 和 6 道 Sliding Window；每周完成 3 道新题和 2 道无提示复刷
 
 ---
-## Phase3:补足RAG所需的前置基础知识 & CSAPP学习 & CS70离散数学学习
-### 目标
 
-不是泛泛补完数学、PyTorch 或 Transformer，而是补足能理解和实现最小 RAG demo 的前置能力。
+## Phase 3：RAG / LLM 应用基础探索
 
-完成标准：
+### 核心问题
 
-- 能解释 RAG 为什么需要分块、embedding、向量相似度检索和上下文增强生成
-- 能用 PyTorch 读懂 tensor、embedding、attention 的基本计算过程
-- 能完成一个小型 RAG demo，并写清楚它的输入、处理流程、局限和失败案例
+一段文本如何经过处理和检索，最后成为带有来源依据的回答？
 
-### 前半段：RAG 前置基础
+Phase 3 不要求先补完一整套数学、PyTorch 或 Transformer 课程，而是在实验和小项目中发现真正需要补的知识。
 
-#### 数学最小基础
+### 可以探索的三个方向
 
-- [ ] 向量与矩阵：理解向量、矩阵、矩阵乘法、转置、维度变化
-- [ ] 向量相似度：理解 dot product、cosine similarity，以及它们为什么能用于检索
-- [ ] 概率与归一化：理解概率分布、logits、softmax 的直觉
-- [ ] 线性变换直觉：理解 embedding 向量空间和线性层的输入输出关系
-- [ ] 产出一篇笔记：`notes/library/math-for-ai/RAG 需要哪些数学基础`
+#### 1. 核心概念
 
-#### PyTorch 最小基础
+- Tokenization：文本如何变成 token，以及长度如何影响上下文。
+- Embedding：文本如何表示成向量。
+- 向量相似度：dot product、cosine similarity 和 top-k 检索的直觉。
+- Chunking：chunk size、overlap、语义边界和失败案例。
+- Context window：为什么检索结果需要被选择后放进 prompt。
 
-- [ ] Tensor 基础：创建 tensor、查看 shape、索引、切片、广播和矩阵运算
-- [ ] Autograd 基础：理解 `requires_grad`、反向传播和参数更新
-- [ ] Module 基础：会写一个最小 `nn.Module`，理解 forward 的作用
-- [ ] Dataset/DataLoader 基础：能把文本样本包装成可迭代数据
-- [ ] Embedding 层小实验：用 `nn.Embedding` 观察 token id 到向量的映射
-- [ ] 产出一个小 notebook 或脚本：`projects/math-for-rag-labs/notebooks/pytorch-basics-for-rag`
+这些内容按实际卡点学习，不要求形成完整课程进度。
 
-#### Transformer 最小基础
+#### 2. 小型实验
 
-- [ ] Tokenization：理解文本如何变成 token id
-- [ ] Embedding：理解 token embedding 和 position embedding 的作用
-- [ ] Attention：能解释 query、key、value 和 attention score 的计算直觉
-- [ ] Context window：理解上下文长度限制，以及为什么 RAG 要把外部资料塞进 prompt
-- [ ] Encoder / decoder / decoder-only：理解三类结构的基本差别，不追求从零训练模型
-- [ ] 产出一篇笔记：`notes/library/math-for-ai/Transformer 与 RAG 的关系`
+- 继续在 `projects/math-for-rag-labs/` 中用手算、NumPy 或 PyTorch 验证概念。
+- 比较不同向量、chunk size、overlap 和 top-k 带来的结果差异。
+- 记录实验现象、疑问和失败原因，不要求每个实验都包装成独立项目。
 
-### 后半段：最小 RAG demo
+#### 3. 最小 RAG 闭环
 
-- [ ] 选择一个小型文档集：优先使用自己的 markdown 笔记或 `textlab-cli` 处理后的文本
-- [ ] 完成文档分块：记录 chunk size、overlap 和分块失败案例
-- [ ] 完成 embedding 与向量存储：可以先用本地文件或轻量向量库，不追求复杂架构
-- [ ] 完成相似度检索：输入问题后返回 top-k 相关片段
-- [ ] 完成生成问答：把检索片段放进 prompt，生成带来源引用的回答
-- [ ] 增加最小测试：至少覆盖分块、检索和空结果处理
-- [ ] 写 README：说明项目目标、运行方式、架构流程、已知局限和下一步
-- [ ] 写一次复盘：记录哪些基础知识真正用上了，哪些只是暂时不需要
+优先使用自己的 Markdown 笔记或 `textlab-cli` 处理后的文本，逐步尝试：
 
+```text
+文档加载 → chunk → embedding → 检索 → 带来源回答
+```
 
-### CS70:  Discrete Mathematics and Probability Theory
+这个闭环可以从很小的文档集开始。重点是理解每一层的职责，而不是一次做出完整产品。
 
-[官方网址](https://www.eecs70.org)
+### 自然进入 Phase 4 的信号
 
-每日学习流程：
+- 能够运行并解释一个简单的 RAG 流程。
+- 知道分块、检索或回答在哪些情况下会失败。
+- 已经出现一个自己愿意继续深入的真实问题或使用场景。
 
-- full-slides
-- mini-vitamin
-- Note
-- Discussion
-形成自己的笔记
+这些是方向信号，不是必须同时完成的硬门槛。Phase 3 和 Phase 4 可以有少量重叠，也可以根据兴趣返回补充实验。
 
-### CSAPP学习：
+### 长期副线
 
+- [CS70](https://www.eecs70.org)：用于训练逻辑、证明和概率思维，按兴趣持续学习。
+- CSAPP / Linux：用于理解文件、进程、网络、内存和系统调试，按项目需要推进。
+- 算法：保持低频、持续的模式练习和无提示复刷。
+
+这些副线不作为开始或完成 RAG 项目的前置条件。
+
+---
+
+## Phase 4：AI 系统工程与项目深化
+
+### 核心问题
+
+如何把“能够运行的 AI demo”变成可靠、可测试、真正有用的系统？
+
+Phase 4 不预先锁定唯一项目。进入这个阶段后，根据 Phase 3 暴露出来的兴趣和问题选择一个主要方向即可。
+
+### 候选方向
+
+#### 方向一：AI Reader + RAG
+
+把 Phase 3 的检索能力放进现有 AI Reader，探索整本资料检索、来源定位、索引更新和失败处理。
+
+这是与现有项目衔接最自然的方向，但不是必须选择的唯一方向。
+
+#### 方向二：学习 / 研究 Agent
+
+探索一个能够检索资料、调用工具、生成笔记草稿或候选复习卡的 Agent。重点关注工具调用、状态、重试和人工确认，而不是追求 Agent 数量。
+
+#### 方向三：AI 后端工程
+
+围绕 API、数据库、异步任务、部署、日志、评测和安全深化工程能力。适合在学习过程中发现自己更喜欢系统实现和后端边界时选择。
+
+### 各方向共同关注的能力
+
+- 清楚的模块边界和输入输出。
+- 自动测试、错误处理和可复现运行方式。
+- 对检索、模型调用或工具调用结果进行评测。
+- 记录延迟、成本、失败案例和工程取舍。
+- 用 README、demo 或复盘说明真正解决了什么问题。
+
+### Phase 4 的弹性原则
+
+- 一段时间只深化一个主要问题，避免同时启动多个 Agent 或 RAG 项目。
+- 框架只在解决真实复杂度时引入，不把 LangGraph、LlamaIndex 或向量数据库 API 当成学习目标本身。
+- 允许在尝试后更换方向；保留实验结论和转向原因即可，不把转向视为失败。
+- 作品深度优先于仓库数量和功能数量。
