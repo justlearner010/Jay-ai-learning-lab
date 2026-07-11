@@ -14,3 +14,6 @@
 	path = projects/csapp-linux-lab
 	url = https://github.com/justlearner010/csapp-linux-lab.git
 	branch = main
+[submodule "projects/transformer-from-scratch-lab"]
+	path = projects/transformer-from-scratch-lab
+	url = https://github.com/justlearner010/transformer-from-scratch-lab.git

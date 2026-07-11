@@ -43,6 +43,7 @@ Learning Lab 只作为笔记地图。实际内容位于独立的 [jay-ai-enginee
 | [AI Reader](https://github.com/justlearner010/ai_reader) | 支持 AI 解释、翻译和笔记的阅读器 | [`projects/ai-reader`](./projects/ai-reader) |
 | [TextLab CLI](https://github.com/justlearner010/jay-first-cli-text-tool) | 用于文本统计、分块和测试练习的 Python CLI | [`projects/jay-first-cli-text-tool`](./projects/jay-first-cli-text-tool) |
 | [My Website](https://github.com/justlearner010/my_website) | 个人网站与项目展示入口 | [`projects/my_website`](./projects/my_website) |
+| [Transformer From Scratch Lab](https://github.com/justlearner010/transformer-from-scratch-lab) | 理论优先、含无答案 Lab 与本地 hidden autograder 的 Transformer 学习课程 | [`projects/transformer-from-scratch-lab`](./projects/transformer-from-scratch-lab) |
 
 ## 如何使用
 
