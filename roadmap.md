@@ -62,49 +62,62 @@
 
 ---
 
-## Phase 3：RAG / LLM 应用基础探索
+## Phase 3：Transformer 机制与从零实现
 
 ### 核心问题
 
-一段文本如何经过处理和检索，最后成为带有来源依据的回答？
+Transformer 如何让 token 彼此关注，并在最小可训练任务中完成下一个 token 预测？
 
-Phase 3 不要求先补完一整套数学、PyTorch 或 Transformer 课程，而是在实验和小项目中发现真正需要补的知识。
+这一阶段先跟随 [DeepLearning.AI Transformers in Practice](https://learn.deeplearning.ai/courses/transformers-in-practice/) 学习，并用 NumPy 从零实现核心机制。目标是建立扎实的机制直觉，而不是抢先拼装 RAG 应用。
 
-### 可以探索的三个方向
+### 实现边界
 
-#### 1. 核心概念
+- 首轮只实现单层、单头 Transformer；先不做 multi-head attention、性能优化或框架封装。
+- 每个机制都采用“理论理解 → 无答案 Lab → 独立小 demo”的顺序；不把参考实现直接提供给学习者。
+- Lab 提供函数契约、shape 约束、思考提示和少量冒烟测试；核心 autograder 用隐藏测试验证机制、边界和数值稳定性。
+- Lab 完成后，独立实现并训练一个极小的字符级 next-token prediction demo，证明各模块能够协同工作。
+- RAG 留到理解 Transformer 基础并完成本轮复盘后，再根据真实兴趣决定是否进入。
 
-- Tokenization：文本如何变成 token，以及长度如何影响上下文。
-- Embedding：文本如何表示成向量。
-- 向量相似度：dot product、cosine similarity 和 top-k 检索的直觉。
-- Chunking：chunk size、overlap、语义边界和失败案例。
-- Context window：为什么检索结果需要被选择后放进 prompt。
+### 两周、按模块验收的学习闭环
 
-这些内容按实际卡点学习，不要求形成完整课程进度。
+建议用两周（10 个学习日、约 50 小时）完成。每天不必强行填满，可按 2–3 小时跟课和推导、1.5–2 小时实现与测试、30 分钟记录实验现象与卡点来安排。进度以模块是否能解释和验证为准；若一个机制尚未理解，优先留出时间补足，而不为了赶进度跳过。
 
-#### 2. 小型实验
+**重要程度标记：P0 = 必须吃透；P1 = 本轮必须完成；P2 = 理解用途即可。**
+**难度梯度：1 = 入门；2 = 基础推导；3 = 容易卡在矩阵 shape 或数值细节；4 = 需要整合多个机制。**
 
-- 继续在 `projects/math-for-rag-labs/` 中用手算、NumPy 或 PyTorch 验证概念。
-- 比较不同向量、chunk size、overlap 和 top-k 带来的结果差异。
-- 记录实验现象、疑问和失败原因，不要求每个实验都包装成独立项目。
+#### 第 1 周任务包：理解信息如何流动（P0）
 
-#### 3. 最小 RAG 闭环
+| 模块 | 重要程度 | 难度 | 完成证据 |
+| --- | --- | --- | --- |
+| token 向量、矩阵 shape 与 Q/K/V 投影 | P0 | 2/4 | 能写出每个张量的含义与 shape。 |
+| 缩放点积 attention 与 softmax | P0 | 3/4 | 用固定输入算出并解释 attention 权重。 |
+| causal mask 与单头 self-attention | P0 | 3/4 | 验证未来 token 的 attention 权重为 0。 |
+| LayerNorm、FFN、残差连接 | P1 | 3/4 | 能说明各自解决的问题，并通过单独检查。 |
+| 单层 Transformer block 前向传播 | P0 | 4/4 | 全部模块连接后前向传播可运行、shape 正确。 |
 
-优先使用自己的 Markdown 笔记或 `textlab-cli` 处理后的文本，逐步尝试：
+这一周不要求均匀分配时间。每个关卡先完成课程与推导，再在无实现答案的 Lab 中完成函数；autograder 只报告失败类别和机制提示，不泄露隐藏输入或期望输出。优先把 P0 模块讲清、通过评分，再处理 P1；遇到 shape 或 softmax 卡点时可以整段时间只解决这一个问题。
 
-```text
-文档加载 → chunk → embedding → 检索 → 带来源回答
-```
+#### 第 2 周任务包：证明机制可以学习（P1）
 
-这个闭环可以从很小的文档集开始。重点是理解每一层的职责，而不是一次做出完整产品。
+| 模块 | 重要程度 | 难度 | 完成证据 |
+| --- | --- | --- | --- |
+| 字符级数据、embedding、输出层 | P1 | 2/4 | 输入、目标和输出 vocab 维度一致。 |
+| 交叉熵、反向传播与参数更新 | P0 | 4/4 | 能解释 loss 的含义，训练时 loss 明显下降。 |
+| 字符生成 | P1 | 3/4 | 从 seed 生成一段字符序列。 |
+| 失败案例与机制复盘 | P0 | 2/4 | 写清一个失败现象、原因假设及下一步选择。 |
+| multi-head attention / PyTorch / RAG 选择 | P2 | 1/4 | 只在复盘时决定是否作为下阶段方向。 |
 
-### 自然进入 Phase 4 的信号
+第 2 周先从零独立写出小 demo，再训练、生成和复盘；训练问题应回溯到数据、loss 或 Transformer block 的具体边界，而不是靠增加训练时间掩盖问题。完成后才评估是否值得进入更大项目。
 
-- 能够运行并解释一个简单的 RAG 流程。
-- 知道分块、检索或回答在哪些情况下会失败。
-- 已经出现一个自己愿意继续深入的真实问题或使用场景。
+### 可见成果
 
-这些是方向信号，不是必须同时完成的硬门槛。Phase 3 和 Phase 4 可以有少量重叠，也可以根据兴趣返回补充实验。
+- 一组 NumPy 实验与模块级验证脚本。
+- 一套带隐藏核心测试的 Transformer Lab 与薄弱点报告。
+- 每个模块一份简短的机制说明或实验记录。
+- 一个可运行的字符级 next-token prediction demo。
+- 一份说明理解、卡点与是否进入 multi-head attention 或后续 RAG 的复盘。
+
+完成这个闭环后，RAG、multi-head attention 或更完整的 PyTorch Transformer 都是可选的下一步，而不是预设前提。
 
 ### 长期副线
 
@@ -112,7 +125,7 @@ Phase 3 不要求先补完一整套数学、PyTorch 或 Transformer 课程，而
 - CSAPP / Linux：用于理解文件、进程、网络、内存和系统调试，按项目需要推进。
 - 算法：保持低频、持续的模式练习和无提示复刷。
 
-这些副线不作为开始或完成 RAG 项目的前置条件。
+这些副线不作为开始或完成 Transformer 实现的前置条件。
 
 ---
 

@@ -21,6 +21,9 @@
 
 #### 未来会做的：探索与思考
 
+- [ ] Phase 3：完成两周（10 个学习日）NumPy Transformer 从零实现闭环（单层、单头；按模块验证，后字符级 next-token prediction）
+  - [ ] 第 1 周任务包（P0）：先完成理论推导，再完成无答案 Lab：Q/K/V、缩放点积 attention、causal mask、单头 self-attention 与单层 Transformer block；autograder 核心测试保持隐藏
+  - [ ] 第 2 周任务包（P1）：不看 Lab 答案，独立实现字符级训练与生成 demo；P0：能解释交叉熵与参数更新，并记录一个失败案例及原因假设；P2：只在复盘时决定是否进入 multi-head attention、PyTorch 或 RAG
 - [ ] 沉淀自己的学习系统，把每个新主题的学习沉淀成一个迅速搭建的**模版系统**，不需要自己一点一点搭建项目结构
 - [x] 使用codex 进行每日学习的艾宾浩斯遗忘曲线的自动化，自动读取新增在GitHub上的新的笔记和内容，做好知识的retrieve、recall
 - [x] Phase3任务设计和构想，结合AI Agent学习路线以及自己感兴趣的进行任务方向确认
