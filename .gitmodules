@@ -10,3 +10,10 @@
 [submodule "notes/library"]
 	path = notes/library
 	url = https://github.com/justlearner010/jay-ai-engineering-notes.git
+[submodule "projects/csapp-linux-lab"]
+	path = projects/csapp-linux-lab
+	url = https://github.com/justlearner010/csapp-linux-lab.git
+	branch = main
+[submodule "projects/transformer-from-scratch-lab"]
+	path = projects/transformer-from-scratch-lab
+	url = https://github.com/justlearner010/transformer-from-scratch-lab.git

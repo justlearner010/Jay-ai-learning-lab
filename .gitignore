@@ -1,1 +1,19 @@
 .worktrees/
+
+# macOS
+.DS_Store
+
+# Local editor/app state
+.obsidian/
+.claudian/
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
