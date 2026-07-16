@@ -1,4 +1,4 @@
-# General Engineering Course Phase Skill and Attention Application Design
+# Designing Engineering Learning Phases Skill and Attention Application Design
 
 ## Purpose
 
@@ -24,7 +24,8 @@ LayerNorm, residual connections, FFN, training, or generation.
 
 ## Domain-neutral course-phase model
 
-The reusable skill will be named `course-phase-design`. It should trigger when
+The reusable skill will be named `designing-engineering-learning-phases`. It
+should trigger when
 designing, extending, or revising a staged engineering self-study course,
 especially when the learner needs concept dependencies, progressive practice,
 Labs, assessment, mastery gates, or a next phase derived from prior evidence.
