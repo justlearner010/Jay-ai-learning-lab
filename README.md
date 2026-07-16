@@ -43,6 +43,7 @@ Learning Lab 只作为笔记地图。实际内容位于独立的 [jay-ai-enginee
 | [AI Reader](https://github.com/justlearner010/ai_reader) | 支持 AI 解释、翻译和笔记的阅读器 | [`projects/ai-reader`](./projects/ai-reader) |
 | [TextLab CLI](https://github.com/justlearner010/jay-first-cli-text-tool) | 用于文本统计、分块和测试练习的 Python CLI | [`projects/jay-first-cli-text-tool`](./projects/jay-first-cli-text-tool) |
 | [My Website](https://github.com/justlearner010/my_website) | 个人网站与项目展示入口 | [`projects/my_website`](./projects/my_website) |
+| [Pytest Source Study](https://github.com/justlearner010/pytest) | pytest 源码阅读与开源协作训练；`main` 保持与上游同步 | [`projects/pytest`](./projects/pytest) |
 
 ## 如何使用
 
