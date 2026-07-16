@@ -10,3 +10,8 @@
 [submodule "notes/library"]
 	path = notes/library
 	url = https://github.com/justlearner010/jay-ai-engineering-notes.git
+[submodule "projects/pytest"]
+	path = projects/pytest
+	url = https://github.com/justlearner010/pytest.git
+	branch = main
+	shallow = true

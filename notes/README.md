@@ -18,6 +18,7 @@ Learning Lab 只负责笔记导航。实际笔记、提交和版本历史继续�
 
 - [按主题查找](https://github.com/justlearner010/jay-ai-engineering-notes/blob/main/indexes/by-topic.md) — 本地：`library/indexes/by-topic.md`
 - [按日期查找](https://github.com/justlearner010/jay-ai-engineering-notes/blob/main/indexes/by-date.md) — 本地：`library/indexes/by-date.md`
+- [Pytest 源码学习与开源协作训练](library/testing/pytest-source-study/README.md) — 4 周源码阅读、实验与历史 issue 复现路线
 
 ## 维护方式
 

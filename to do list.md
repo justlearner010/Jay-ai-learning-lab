@@ -19,6 +19,16 @@
 - [ ] 算法 Week 4（07.13–07.19）：完成 Fruit Into Baskets、Minimum Operations to Reduce X to Zero、Find All Anagrams，复刷 2 道旧题
 - [ ] 07.20–07.21：更新[题集状态](./notes/library/algorithms/problem-set.md)，完成 Phase 2 算法复盘
 
+#### Pytest 源码与开源协作副线（每周 5–7 小时，共 4 周）
+
+- [x] Fork `pytest-dev/pytest` 为 `justlearner010/pytest`，配置 `origin` / `upstream` 并验证 `main` 零分叉
+- [x] 建立 Python 3.14 editable 开发环境，通过 `testing/test_config.py`、tox py314 与完整 linting 基线
+- [x] 将 pytest fork 以 `projects/pytest` 子模块关联到 Learning Lab，并建立[四周学习入口](./notes/library/testing/pytest-source-study/README.md)
+- [ ] Week 1：完成命令入口、Config、Session 与 ExitCode 调用链，并运行生命周期黑盒实验
+- [ ] Week 2：画出 Collector/Item 节点树，验证 node id、`--collect-only` 与 `-k`
+- [ ] Week 3：验证 fixture 依赖、teardown 逆序及 pluggy hook 边界
+- [ ] Week 4：复现历史 issue #13384，对照上游修复但不发布 PR，完成阶段复盘
+
 #### 未来会做的：探索与思考
 
 - [ ] 沉淀自己的学习系统，把每个新主题的学习沉淀成一个迅速搭建的**模版系统**，不需要自己一点一点搭建项目结构
