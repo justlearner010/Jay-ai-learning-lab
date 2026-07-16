@@ -35,12 +35,96 @@ The skill operates on five domain-neutral objects:
 | Object | Meaning | Examples |
 | --- | --- | --- |
 | Capability question | One observable ability the phase should create. | Explain a mechanism, implement an API boundary, debug a process, operate a service. |
-| Dependency graph | The minimum prerequisite chain for that ability. | Types before parsing; processes before signals; retrieval before agentic routing. |
-| Knowledge gate | One concept or engineering decision with an independent check. | Error propagation, file descriptors, cache invalidation, attention scores. |
+| Knowledge graph | Nodes, hard/soft dependencies, downstream consumers, and global position. | Types before parsing; processes before signals; retrieval before agentic routing. |
+| Knowledge gate | One classified knowledge node or engineering decision with an independent check. | Error propagation, file descriptors, cache invalidation, attention scores. |
 | Practice artifact | The smallest environment that makes the gate observable. | Hand trace, focused function, CLI scenario, failing service, notebook experiment. |
 | Mastery evidence | Evidence that survives beyond the scaffold. | Behavioral test, diagnosis, unseen transfer, oral explanation, independent mini project. |
 
-Before selecting tasks, classify the phase by its dominant learning mode:
+## Knowledge-node classification
+
+Do not start by inventing tasks. First build a compact knowledge map. Every
+candidate node must be annotated on four independent axes.
+
+### 1. Knowledge type
+
+Assign one primary type and, only when useful, one secondary type:
+
+| Type | The learner is trying to know or do |
+| --- | --- |
+| fact/reference | Recognize vocabulary, syntax, commands, or where to look. |
+| concept/model | Explain entities, relationships, and a useful mental model. |
+| mechanism/causality | Predict why an input, event, or change produces an outcome. |
+| procedure/tool | Execute a repeatable operation and interpret its output. |
+| contract/boundary | Define valid inputs, outputs, errors, and responsibility ownership. |
+| diagnosis/failure | Distinguish hypotheses, localize root cause, and prevent recurrence. |
+| integration/architecture | Compose verified parts and reason about interfaces and trade-offs. |
+| operation/reliability | Observe, measure, recover, and operate under real constraints. |
+
+### 2. Mastery depth
+
+Record both `current_depth` from evidence and `target_depth` required by the
+larger learning goal:
+
+| Depth | Observable standard |
+| --- | --- |
+| D0 locate | Recognize the term and find an authoritative reference. |
+| D1 explain | Describe purpose, inputs, outputs, and one boundary in own words. |
+| D2 reproduce | Follow a known procedure or example and explain each major step. |
+| D3 apply independently | Solve a bounded new case without procedural hints. |
+| D4 diagnose and transfer | Handle variations or failures and transfer the idea to a different context. |
+| D5 design and evaluate | Choose among alternatives, justify trade-offs, and define verification. |
+
+Depth is not a universal ladder that every node must climb. A reference fact
+may stop at D0 or D1; a central diagnostic capability may require D4.
+
+### 3. Dependency role
+
+Mark each edge and node explicitly:
+
+- **hard prerequisite:** later work is invalid or uninterpretable without it;
+- **soft prerequisite:** useful context that can be learned just in time;
+- **co-requisite:** best learned through the same observable experiment;
+- **downstream consumer:** later capabilities that reuse this node;
+- **integration node:** combines several previously verified nodes.
+
+Use the graph to find bottlenecks. Do not infer importance from the apparent
+difficulty or popularity of a topic.
+
+### 4. Global importance
+
+Rank importance relative to the target capability and roadmap, not relative to
+the field as a whole:
+
+| Priority | Meaning |
+| --- | --- |
+| P0 bottleneck | A hard dependency, frequent failure source, or defining capability. Weakness invalidates downstream evidence. |
+| P1 core | Directly reused and must be independently applied, but failure does not invalidate the entire chain. |
+| P2 support | Helps implementation or explanation; focused guided practice is sufficient. |
+| P3 orientation | Awareness or lookup knowledge; do not build a standalone Lab for it. |
+
+Base the ranking on downstream centrality, target-role relevance, recurrence,
+failure cost, transfer value, and the learner's current evidence gap. Record a
+one-sentence rationale for every P0 and P1 node.
+
+## Task-layer selection
+
+Only after classification, choose the highest task layer justified by
+`knowledge type + target depth + dependency role + importance`:
+
+| Task layer | What the task demands |
+| --- | --- |
+| T0 map | Locate, recognize, or build a compact reference handle. |
+| T1 explain | Restate, compare, draw, trace, or predict in a minimal example. |
+| T2 guided practice | Reproduce a bounded example with visible support. |
+| T3 constrained Lab | Implement or operate inside an explicit contract with checks. |
+| T4 diagnosis and variation | Inject or encounter failures, distinguish hypotheses, and transfer. |
+| T5 independent integration | Design and verify a new composition or capstone with reduced scaffolding. |
+
+The target depth sets the required ceiling; dependencies set the order;
+importance sets intensity. Do not assign a T3 Lab to P3 orientation knowledge,
+and do not accept only a T1 explanation for a P0 node targeting D4.
+
+Before selecting a phase structure, also classify its dominant learning mode:
 
 - **mechanism:** understand why a computation or system behavior occurs;
 - **contract:** implement and defend an interface or boundary;
@@ -51,6 +135,27 @@ Before selecting tasks, classify the phase by its dominant learning mode:
 A phase may combine modes, but one mode must dominate so that assessment does
 not collapse into a generic checklist.
 
+## Importance-to-intensity rule
+
+Learning intensity must increase with global importance and evidence gap. This
+is the central allocation rule of the skill.
+
+Intensity is expressed through independence, variation, diagnostic pressure,
+verification rigor, repetition, and transfer distance—not by making reading
+longer or adding arbitrary task count.
+
+| Priority | Default intensity profile |
+| --- | --- |
+| P0 | Multiple representations; prediction before action; constrained implementation or experiment; adversarial or failure cases; independent transfer; closed-book retrieval; regression evidence; revisit in later phases. |
+| P1 | One complete understand-practice-verify loop; at least one boundary/failure case; one new variation; concise retrieval check. |
+| P2 | Bounded explanation plus one focused guided practice or observation; verify the one property needed downstream. |
+| P3 | Concise orientation, lookup handle, or recognition check; no standalone project or heavy assessment. |
+
+Adjust upward when `target_depth - current_depth` is large or failure cost is
+high. Adjust downward when strong recent evidence already exists. Never give
+all nodes the P0 treatment; if everything is P0, the phase boundary or target
+capability is underspecified.
+
 ## Reusable course-phase design protocol
 
 For every new phase, the skill must:
@@ -60,13 +165,17 @@ For every new phase, the skill must:
 2. Separate explicit evidence from learner claims and stale documentation.
    Claims guide scope; tests, graders, notes, and artifacts establish current
    readiness. Unknown evidence is reported as unknown rather than failed.
-3. Identify one capability question, dominant learning mode, and minimum
-   dependency graph needed to answer it.
-4. Present two or three possible scopes when the next boundary is ambiguous,
+3. Identify one capability question and construct the minimum knowledge graph
+   needed to answer it.
+4. Classify every retained node by knowledge type, current/target depth,
+   dependency role, and global importance before proposing tasks.
+5. Select task layers and verification intensity from those annotations.
+6. Present two or three possible scopes when the next boundary is ambiguous,
    recommend one, and obtain user approval before generating artifacts.
-5. Organize work by knowledge dependency, never by arbitrary daily quotas.
+7. Organize work by knowledge dependency, never by arbitrary daily quotas.
    Time estimates may describe capacity but cannot become unlock conditions.
-6. Give every knowledge point the same abstract learning loop:
+8. Give every practiced knowledge point the same abstract learning loop, with
+   steps omitted or deepened according to its priority and target depth:
 
    ```text
    motivating problem
@@ -80,23 +189,23 @@ For every new phase, the skill must:
      -> next unlock
    ```
 
-7. Select verification that matches the dominant mode. A mechanism phase may
+9. Select verification that matches the dominant mode. A mechanism phase may
    use derivation and controlled experiments; a contract phase may use unit and
    boundary tests; a diagnosis phase may use injected failures and incident
    traces; an integration phase may use end-to-end checks; an operation phase
    may use metrics, runbooks, and recovery drills.
-8. Keep assessment artifacts answer-free when independent learning is the
+10. Keep assessment artifacts answer-free when independent learning is the
    goal. Hidden graders are optional, not universal. When used, they may reveal
    only the current gate, failure category, thinking prompt, and unlock state.
    When hidden grading is unsuitable, use a black-box harness, review rubric,
    reproducible command, trace comparison, or observable acceptance scenario.
-9. Require later practice gates to consume the contracts or evidence created
+11. Require later practice gates to consume the contracts or evidence created
    by earlier gates. Do not allow an integration task to conceal a failed
    prerequisite through duplicate implementation or unexplained automation.
-10. Define completion using multiple evidence types appropriate to the topic:
+12. Define completion using multiple evidence types appropriate to the topic:
     reproducible behavior, unseen transfer, short closed-book explanation, one
     real or deliberately injected failure, and an independent artifact.
-11. State non-goals and the exact next capability that becomes possible after
+13. State non-goals and the exact next capability that becomes possible after
     completion.
 
 The skill is a reusable personal Codex skill under `~/.codex/skills`, not a
@@ -127,6 +236,8 @@ For any repository, the skill should first reuse the local course structure.
 If no structure exists, propose a minimal equivalent of:
 
 - phase overview: capability question, prerequisites, scope, non-goals;
+- knowledge map: type, current/target depth, dependencies, importance, and
+  task-layer decision for every retained node;
 - bounded resources: exact ranges and reading questions;
 - concept/practice tasks: dependency-ordered gates;
 - practice environment: Lab, experiment, debugging scenario, or service;
@@ -137,6 +248,31 @@ If no structure exists, propose a minimal equivalent of:
 File names are repository decisions, not requirements imposed by the skill.
 
 ## First application: Transformer attention
+
+### Attention knowledge map and intensity decision
+
+This application must demonstrate the generic decision model instead of
+jumping directly to a task list. Current depth is conservative: the Week 0
+matrix grader is evidence for matrix operations, but missing written answers
+are not treated as proof of softmax or attention mastery.
+
+| Knowledge node | Type | Current evidence/depth | Target depth | Dependency role | Priority | Task layer |
+| --- | --- | --- | --- | --- | --- | --- |
+| Matrix shape and product | mechanism | Week 0 grader 6/6; D3 for bounded matrix cases | D3 | hard prerequisite, already satisfied | P0 globally, maintenance only in this phase | T1 retrieval bridge, no repeated Lab |
+| Q/K/V projection roles | concept + mechanism | projection mechanics evidenced; semantic roles unknown | D3 | hard prerequisite to scores and value read | P1 | T1 explanation → T3 constrained Lab |
+| Query-key score matrix | mechanism | no direct evidence | D4 | central bottleneck and downstream input to all attention weights | P0 | T1 trace → T3 Lab → T4 variation |
+| Scaling by `sqrt(d_k)` | mechanism | written mastery unknown | D3 | hard prerequisite to correct score distribution | P1 | T1 derivation → T3 property check |
+| Row-wise stable softmax | mechanism + contract | written mastery unknown | D4 | numerical and axis bottleneck | P0 | T1 counterexample → T3 Lab → T4 failure injection |
+| Weighted read from V | mechanism | no direct evidence | D4 | defining output mechanism | P0 | T1 hand trace → T3 Lab → T4 targeted mutation |
+| Shape/error/immutability boundaries | contract + diagnosis | matrix boundaries evidenced; attention boundaries unknown | D3 | supports trustworthy implementation | P1 | T3 boundary checks → T4 diagnosis |
+| Attention heatmap presentation | procedure/tool | no evidence needed | D2 | supporting observation only | P2 | T2 guided diagnostic demo |
+| Full attention composition | integration | prerequisites not yet integrated | D4 | integration node | P0 | T5 reduced-scaffold composition and transfer |
+
+This allocation explains why score semantics, stable softmax, value reading,
+and full composition receive the deepest practice. Projection roles and
+scaling remain core but receive fewer independent variations. Heatmap tooling
+does not receive its own Lab, and completed matrix work is retrieved rather
+than repeated.
 
 ### Attention knowledge chain
 
