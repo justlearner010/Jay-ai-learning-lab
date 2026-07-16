@@ -1,12 +1,17 @@
-# Course Phase Design Skill and Attention Week Design
+# General Engineering Course Phase Skill and Attention Application Design
 
 ## Purpose
 
-This design establishes a reusable course-phase design process and applies it
-to the next Transformer learning package. The course is mastery-paced rather
-than calendar-paced: a "week" names a coherent knowledge package, not seven
-fixed daily assignments. The learner may advance quickly when interested or
-remain on one gate until the evidence is sufficient.
+This design establishes a domain-neutral process for turning engineering
+knowledge into mastery-paced course phases, then applies that process to the
+next Transformer learning package. The reusable process is intended for topics
+such as programming, software engineering, computer systems, backend and data
+engineering, ML/LLM systems, RAG, and Agents. Transformer is the first usage
+case, not the skill's governing domain.
+
+A course phase names a coherent capability package, not a fixed number of
+days. The learner may advance quickly when interested or remain on one gate
+until the evidence is sufficient.
 
 The immediate package answers one question:
 
@@ -17,12 +22,35 @@ It covers Q/K/V projections and single-sample, single-head scaled dot-product
 attention. It does not include causal masking, batching, multi-head attention,
 LayerNorm, residual connections, FFN, training, or generation.
 
-## Reusable course-phase design protocol
+## Domain-neutral course-phase model
 
 The reusable skill will be named `course-phase-design`. It should trigger when
-designing, extending, or revising a staged self-study course, especially when
-the learner needs concept dependencies, progressive Labs, hidden assessment,
-mastery gates, or a next phase derived from prior evidence.
+designing, extending, or revising a staged engineering self-study course,
+especially when the learner needs concept dependencies, progressive practice,
+Labs, assessment, mastery gates, or a next phase derived from prior evidence.
+
+The skill operates on five domain-neutral objects:
+
+| Object | Meaning | Examples |
+| --- | --- | --- |
+| Capability question | One observable ability the phase should create. | Explain a mechanism, implement an API boundary, debug a process, operate a service. |
+| Dependency graph | The minimum prerequisite chain for that ability. | Types before parsing; processes before signals; retrieval before agentic routing. |
+| Knowledge gate | One concept or engineering decision with an independent check. | Error propagation, file descriptors, cache invalidation, attention scores. |
+| Practice artifact | The smallest environment that makes the gate observable. | Hand trace, focused function, CLI scenario, failing service, notebook experiment. |
+| Mastery evidence | Evidence that survives beyond the scaffold. | Behavioral test, diagnosis, unseen transfer, oral explanation, independent mini project. |
+
+Before selecting tasks, classify the phase by its dominant learning mode:
+
+- **mechanism:** understand why a computation or system behavior occurs;
+- **contract:** implement and defend an interface or boundary;
+- **diagnosis:** reproduce, localize, explain, and prevent failures;
+- **integration:** compose independently verified components;
+- **operation:** observe, deploy, measure, recover, and make trade-offs.
+
+A phase may combine modes, but one mode must dominate so that assessment does
+not collapse into a generic checklist.
+
+## Reusable course-phase design protocol
 
 For every new phase, the skill must:
 
@@ -31,44 +59,85 @@ For every new phase, the skill must:
 2. Separate explicit evidence from learner claims and stale documentation.
    Claims guide scope; tests, graders, notes, and artifacts establish current
    readiness. Unknown evidence is reported as unknown rather than failed.
-3. Identify one governing question and the minimum knowledge chain needed to
-   answer it.
+3. Identify one capability question, dominant learning mode, and minimum
+   dependency graph needed to answer it.
 4. Present two or three possible scopes when the next boundary is ambiguous,
    recommend one, and obtain user approval before generating artifacts.
 5. Organize work by knowledge dependency, never by arbitrary daily quotas.
    Time estimates may describe capacity but cannot become unlock conditions.
-6. Give every knowledge point the same learning loop:
+6. Give every knowledge point the same abstract learning loop:
 
    ```text
    motivating problem
-     -> bounded reading
-     -> hand-worked minimal example
+     -> bounded source material
+     -> minimal observable example or trace
      -> prediction before execution
-     -> dependent Lab gate
-     -> public smoke check and hidden behavioral check
+     -> dependent practice gate
+     -> behavior check
      -> failure explanation
      -> transfer or retrieval check
      -> next unlock
    ```
 
-7. Keep public artifacts answer-free. Public tests may verify imports,
-   signatures, starter behavior, and harmless invariants. Hidden graders may
-   verify behavior but reveal only the current gate, failure category, thinking
-   prompt, and unlock state.
-8. Require later Lab functions to compose earlier functions. Do not allow the
-   learner to bypass a failed mechanism by reimplementing it inside an
-   integration function.
-9. Define completion using multiple kinds of evidence: behavioral tests, an
-   unseen transfer problem, a short closed-book explanation, one real or
-   deliberately injected failure, and a learner-owned mini demo.
-10. State non-goals and the exact next mechanism that becomes possible after
+7. Select verification that matches the dominant mode. A mechanism phase may
+   use derivation and controlled experiments; a contract phase may use unit and
+   boundary tests; a diagnosis phase may use injected failures and incident
+   traces; an integration phase may use end-to-end checks; an operation phase
+   may use metrics, runbooks, and recovery drills.
+8. Keep assessment artifacts answer-free when independent learning is the
+   goal. Hidden graders are optional, not universal. When used, they may reveal
+   only the current gate, failure category, thinking prompt, and unlock state.
+   When hidden grading is unsuitable, use a black-box harness, review rubric,
+   reproducible command, trace comparison, or observable acceptance scenario.
+9. Require later practice gates to consume the contracts or evidence created
+   by earlier gates. Do not allow an integration task to conceal a failed
+   prerequisite through duplicate implementation or unexplained automation.
+10. Define completion using multiple evidence types appropriate to the topic:
+    reproducible behavior, unseen transfer, short closed-book explanation, one
+    real or deliberately injected failure, and an independent artifact.
+11. State non-goals and the exact next capability that becomes possible after
     completion.
 
 The skill is a reusable personal Codex skill under `~/.codex/skills`, not a
-project-specific copy of the Transformer syllabus. Transformer-specific
-details remain in this repository.
+project-specific syllabus template. Domain vocabulary, formulas, libraries,
+function names, and grading cases remain in the target course repository.
 
-## Attention knowledge chain
+## General practice and assessment selection
+
+The skill must not force every topic into a numerical Lab. Choose the smallest
+practice form that exposes the knowledge point:
+
+| Knowledge type | Preferred practice | Typical evidence |
+| --- | --- | --- |
+| Computation or algorithm | Hand trace, minimal implementation, property checks | Derivation, tests, counterexample |
+| API or module boundary | Contract-first function or service | Boundary tests, error behavior, consumer example |
+| Linux or systems behavior | Command experiment, process/file/network observation | Reproducible commands, trace, explanation |
+| Debugging technique | Seeded fault and constrained diagnosis | Reproduction, root cause, regression check |
+| Architecture or integration | Small composed system with explicit interfaces | End-to-end check, failure isolation, trade-off memo |
+| Operations and reliability | Instrumented service scenario | Metrics, alert evidence, runbook, recovery drill |
+| ML/LLM behavior | Controlled experiment and evaluation set | Baseline, metric, failure slices, cost/latency record |
+
+The universal requirement is not a particular tool. It is a visible chain from
+claim to prediction, execution, evidence, explanation, and transfer.
+
+## Generic output contract
+
+For any repository, the skill should first reuse the local course structure.
+If no structure exists, propose a minimal equivalent of:
+
+- phase overview: capability question, prerequisites, scope, non-goals;
+- bounded resources: exact ranges and reading questions;
+- concept/practice tasks: dependency-ordered gates;
+- practice environment: Lab, experiment, debugging scenario, or service;
+- verification: public checks plus optional hidden or black-box assessment;
+- evidence template: failure record, changed understanding, transfer result;
+- completion decision: passed gates, unresolved P0 gaps, and next capability.
+
+File names are repository decisions, not requirements imposed by the skill.
+
+## First application: Transformer attention
+
+### Attention knowledge chain
 
 The next package follows this dependency graph:
 
@@ -96,7 +165,7 @@ testable.
 | 6 | Integrated attention | Earlier functions form one traceable information path. | Composition checks, intermediate diagnostics, hand-calculated oracle, and complete hidden pass. |
 | 7 | Transfer and diagnosis | The mechanism transfers beyond the Lab scaffold. | Unseen problem, closed-book explanation, failure record, and independent mini demo. |
 
-## Learner-facing artifacts
+### Learner-facing artifacts
 
 The implementation will align the existing next-phase files rather than add a
 parallel structure:
@@ -124,7 +193,7 @@ relationship to the current course structure must be inspected during
 implementation and any cleanup must remain outside this package unless it is
 required to avoid an ambiguous learner entry point.
 
-## Lab contract ladder
+### Lab contract ladder
 
 Exact names may be adjusted during implementation only to match an established
 repository convention, but responsibilities and dependencies must remain:
@@ -143,7 +212,7 @@ The learner implementation must not use a framework attention module. NumPy
 matrix operations are allowed because the learning target is attention, not a
 second manual matrix-multiplication exercise.
 
-## Error and diagnostic boundaries
+### Error and diagnostic boundaries
 
 - Reject non-array, non-numeric, empty, or incorrectly ranked inputs at a
   documented boundary.
@@ -158,7 +227,7 @@ second manual matrix-multiplication exercise.
   `numerical stability`, `axis`, `weighted read`, `composition`, or
   `immutability`.
 
-## Verification design
+### Verification design
 
 Public verification confirms that the package is usable without disclosing
 solutions. Hidden verification advances one gate at a time and should include:
@@ -177,7 +246,7 @@ The grader must first be observed failing against the untouched starter. After
 artifact generation, public tests must pass while the answer-free starter
 produces a controlled first-gate hidden response.
 
-## Completion and transition
+### Completion and transition
 
 The package is complete only when the learner:
 
@@ -193,7 +262,7 @@ The next phase may then introduce causal masking. It must not also absorb
 LayerNorm, residuals, FFN, batching, multi-head attention, and training unless
 their own dependency analysis independently justifies that scope.
 
-## Non-goals
+### Attention application non-goals
 
 - No daily schedule or deadline-based unlocks.
 - No full reference implementation in public files.
@@ -201,3 +270,13 @@ their own dependency analysis independently justifies that scope.
 - No framework attention, Agent framework, RAG, or model training.
 - No edits to the learner's current Week 0 implementation.
 - No commit or cleanup of unrelated parent-repository or submodule changes.
+
+## Skill non-goals
+
+- Do not prescribe Transformer terminology outside Transformer courses.
+- Do not require hand calculations when traces, commands, tests, or operational
+  evidence better expose the target capability.
+- Do not require hidden graders for open-ended design or operational work.
+- Do not create a large course before the next capability boundary is clear.
+- Do not equate elapsed time, content volume, or a passing demo with mastery.
+- Do not replace project-local conventions with one global directory layout.
