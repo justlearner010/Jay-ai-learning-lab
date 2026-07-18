@@ -167,3 +167,25 @@ Phase 4 不预先锁定唯一项目。进入这个阶段后，根据 Phase 3 暴
 - 框架只在解决真实复杂度时引入，不把 LangGraph、LlamaIndex 或向量数据库 API 当成学习目标本身。
 - 允许在尝试后更换方向；保留实验结论和转向原因即可，不把转向视为失败。
 - 作品深度优先于仓库数量和功能数量。
+
+---
+
+## Phase 5+ 候选方向：Multi-Agent Coordination
+
+> 本阶段是未来候选，不是当前进度承诺。只有 Phase 4 中出现了单 Agent 难以承担的真实协调复杂度，才进入这一方向。
+
+### 核心问题
+
+如何通过分层协调、责任与权限边界、信息过滤、独立验证和异常升级，让人能以更低的认知与管理成本协调多个 Agent，同时让整个系统执行得更稳定？
+
+### 与前置阶段的关系
+
+```text
+Transformer 机制原理
+  -> 单 Agent / AI 系统的最小可靠闭环
+  -> 多 Agent 的责任分解、信息聚合与协调稳定性
+```
+
+这一项目不以 Agent 数量为目标，也不将公司职位名称当成真实架构。它将对照单 Agent、扁平多 Agent 与分层多 Agent，检验分层机制减少的管理成本是否真的高于新增的协调税。
+
+详细想法与未来实验见 [`incubator/multi-agent-coordination/`](./incubator/multi-agent-coordination/README.md)。
